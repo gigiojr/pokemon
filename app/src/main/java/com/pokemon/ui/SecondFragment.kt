@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.pokemon.R
+import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
+@AndroidEntryPoint
 class SecondFragment : Fragment() {
 
     override fun onCreateView(

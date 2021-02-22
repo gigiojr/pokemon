@@ -9,4 +9,7 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="first_fragment_bt_search">Search</string>
+    <string name="first_fragment_hint_search">Search Pokemon!</string>
 </resources>
