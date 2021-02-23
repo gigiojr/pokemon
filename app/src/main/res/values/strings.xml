@@ -10,6 +10,15 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+    <!-- First Fragment Strings   -->
+    <string name="first_fragment_logo_content_description">Pokemon logo</string>
+    <string name="first_fragment_pokemon_content_description">Pokemon image</string>
+    <string name="first_fragment_title_name">You found a #!</string>
+    <string name="first_fragment_label_height">Your height is #dm</string>
+    <string name="first_fragment_label_weight">Your weight is #hg</string>
+    <string name="first_fragment_subtitle_types">Types</string>
+    <string name="first_fragment_bt_catch">Catch!</string>
     <string name="first_fragment_bt_search">Search</string>
+    <string name="first_fragment_bt_search_content_description">Search button</string>
     <string name="first_fragment_hint_search">Search Pokemon!</string>
 </resources>
