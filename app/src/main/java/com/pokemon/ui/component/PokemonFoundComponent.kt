@@ -23,20 +23,86 @@ class PokemonFoundComponent(context: Context, attrs: AttributeSet?)
         binding.btCatch.setOnClickListener(this)
     }
 
-    fun showPokemon(pokemon: Pokemon) {
+    fun showPokemonFound(pokemon: Pokemon) {
+        this.pokemon = pokemon
+        binding.detailLayout.visibility = View.GONE
+
         Picasso.get()
             .load(pokemon.sprites?.frontDefault)
             .error(R.drawable.ic_image_not_found)
             .into(binding.pokemonImage)
 
-        binding.title.text = resources.getString(R.string.first_fragment_title_name)
+        binding.title.text = resources.getString(R.string.component_pokemon_found_found)
             .replace("#", pokemon.name)
+
+        showCatchButton()
+
+        viewLayout.requestLayout()
+    }
+
+    fun showPokemonCatch(p: Pokemon){
+        pokemon = p
+        binding.detailLayout.visibility = View.VISIBLE
+
+        Picasso.get()
+            .load(p.sprites?.frontDefault)
+            .error(R.drawable.ic_image_not_found)
+            .into(binding.pokemonImage)
+
+        binding.title.text = resources.getString(R.string.component_pokemon_found_catch)
+            .replace("#", p.name)
+
+        binding.labelHeight.text = resources.getString(R.string.component_pokemon_found_label_height)
+            .replace("#", p.height.toString())
+
+        binding.labelWeight.text = resources.getString(R.string.component_pokemon_found_label_weight)
+            .replace("#", p.weight.toString())
+
+        p.abilities?.let { abilityList ->
+            binding.abilitiesLayout.updateSection(
+                text = resources.getString(R.string.component_pokemon_found_subtitle_abilities),
+                items = abilityList.map { it.ability.name }
+            )
+            binding.abilitiesLayout.visibility = View.VISIBLE
+        } ?: apply {
+            binding.abilitiesLayout.visibility = View.GONE
+        }
+
+        p.types?.let { typeList ->
+            binding.typesLayout.updateSection(
+                text = resources.getString(R.string.component_pokemon_found_subtitle_types),
+                items = typeList.map { it.type.name }
+            )
+            binding.abilitiesLayout.visibility = View.VISIBLE
+        } ?: apply {
+            binding.typesLayout.visibility = View.GONE
+        }
+
+        p.heldItems?.let { heldItemList ->
+            binding.heldItemsLayout.updateSection(
+                text = resources.getString(R.string.component_pokemon_found_subtitle_held_items),
+                items = heldItemList.map { it.item.name }
+            )
+            binding.heldItemsLayout.visibility = View.VISIBLE
+        } ?: apply {
+            binding.heldItemsLayout.visibility = View.GONE
+        }
+
+        hideCatchButton()
 
         viewLayout.requestLayout()
     }
 
     override fun onClick(v: View?) {
         pokemon?.let { p -> listener?.onCatchClick(p) }
+    }
+
+    fun showCatchButton() {
+        binding.btCatch.visibility = View.VISIBLE
+    }
+
+    fun hideCatchButton() {
+        binding.btCatch.visibility = View.GONE
     }
 
     interface Listener {
