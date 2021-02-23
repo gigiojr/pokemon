@@ -58,33 +58,33 @@ class PokemonFoundComponent(context: Context, attrs: AttributeSet?)
         binding.labelWeight.text = resources.getString(R.string.component_pokemon_found_label_weight)
             .replace("#", p.weight.toString())
 
-        p.abilities?.let { abilityList ->
+        if (p.abilities != null && p.abilities.isNotEmpty()){
             binding.abilitiesLayout.updateSection(
                 text = resources.getString(R.string.component_pokemon_found_subtitle_abilities),
-                items = abilityList.map { it.ability.name }
+                items = p.abilities.map { it.ability.name }
             )
             binding.abilitiesLayout.visibility = View.VISIBLE
-        } ?: apply {
+        } else {
             binding.abilitiesLayout.visibility = View.GONE
         }
 
-        p.types?.let { typeList ->
+        if(p.types != null && p.types.isNotEmpty()){
             binding.typesLayout.updateSection(
                 text = resources.getString(R.string.component_pokemon_found_subtitle_types),
-                items = typeList.map { it.type.name }
+                items = p.types.map { it.type.name }
             )
             binding.abilitiesLayout.visibility = View.VISIBLE
-        } ?: apply {
+        } else {
             binding.typesLayout.visibility = View.GONE
         }
 
-        p.heldItems?.let { heldItemList ->
+        if(p.heldItems != null && p.heldItems.isNotEmpty()){
             binding.heldItemsLayout.updateSection(
                 text = resources.getString(R.string.component_pokemon_found_subtitle_held_items),
-                items = heldItemList.map { it.item.name }
+                items = p.heldItems.map { it.item.name }
             )
             binding.heldItemsLayout.visibility = View.VISIBLE
-        } ?: apply {
+        } else {
             binding.heldItemsLayout.visibility = View.GONE
         }
 

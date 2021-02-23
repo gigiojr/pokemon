@@ -13,9 +13,6 @@
     <!-- First Fragment Strings   -->
     <string name="fragment_first_logo_content_description">Pokemon logo</string>
 
-    <!-- First Fragment Strings   -->
-    <string name="fragment_second_bt_back">Go Back</string>
-
     <!-- Component Pokemon Strings   -->
     <string name="component_pokemon_found_image_content_description">Pokemon image</string>
     <string name="component_pokemon_found_found">You found a #!</string>
