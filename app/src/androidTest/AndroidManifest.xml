@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pokemon">
+
+    <application
+        android:theme="@style/Base.Theme.AppCompat">
+
+        <activity android:name="com.pokemon.ui.component.flexoptionscomponent.FlexOptionsComponentTestActivity" />
+        <activity android:name="com.pokemon.ui.component.searchbarcomponent.SearchBarComponentTestActivity" />
+    </application>
+</manifest>
