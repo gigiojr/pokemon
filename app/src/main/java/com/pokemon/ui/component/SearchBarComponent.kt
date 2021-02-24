@@ -25,6 +25,7 @@ class SearchBarComponent(context: Context, attrs: AttributeSet?)
     }
 
     private fun initComponent() {
+        binding.progressBar.visibility = View.GONE
         binding.btSearch.setOnClickListener(this)
         binding.searchField.setOnKeyListener(OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
