@@ -1,16 +1,12 @@
 package com.pokemon.ui.component.searchbarcomponent
 
-import android.view.View
-import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import org.hamcrest.Matchers.not
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.pokemon.R
-import org.hamcrest.Matchers.isEmptyString
 import org.junit.Rule
 import org.junit.Test
 

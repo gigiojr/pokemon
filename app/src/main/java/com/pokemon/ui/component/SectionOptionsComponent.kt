@@ -4,10 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.pokemon.R
-import com.pokemon.databinding.ComponentFlexOptionsBinding
-import com.pokemon.databinding.ComponentFlexOptionsTextBinding
 import com.pokemon.databinding.ComponentSectionOptionsBinding
 
 class SectionOptionsComponent(context: Context?, attrs: AttributeSet?)

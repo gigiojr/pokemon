@@ -7,10 +7,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.pokemon.R
-import com.pokemon.data.model.api.Pokemon
-import com.pokemon.databinding.ComponentPokemonFoundBinding
 import com.pokemon.databinding.ComponentSearchBarBinding
-import com.squareup.picasso.Picasso
 
 class SearchBarComponent(context: Context, attrs: AttributeSet?)
     : ConstraintLayout(context, attrs), View.OnClickListener {

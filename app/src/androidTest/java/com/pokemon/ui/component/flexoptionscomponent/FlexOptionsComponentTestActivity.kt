@@ -2,7 +2,6 @@ package com.pokemon.ui.component.flexoptionscomponent
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.pokemon.ui.component.FlexOptionsComponent
 
