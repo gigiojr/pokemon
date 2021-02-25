@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class PokemonEntity (
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val id: Int,
     val name: String,
     val baseExperience: Int,
     val height: Int,
@@ -13,5 +13,4 @@ data class PokemonEntity (
     val order: Int,
     val weight: Int,
     val locationAreaEncounters: String?
-//    val abilities: List<PokemonAbilityEntity>,
 )
