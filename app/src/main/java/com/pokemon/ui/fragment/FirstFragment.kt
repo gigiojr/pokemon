@@ -4,20 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.pokemon.R
+import com.pokemon.data.model.PokeballLabel
 import com.pokemon.data.model.api.Pokemon
+import com.pokemon.data.model.db.PokemonEntity
 import com.pokemon.data.viewmodel.MainViewModel
 import com.pokemon.databinding.FragmentFirstBinding
+import com.pokemon.ui.component.PokeballLabelComponent
 import com.pokemon.ui.component.PokemonFoundComponent
 import com.pokemon.ui.component.SearchBarComponent
+import com.pokemon.ui.component.recyclerview.PokeballLabelRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FirstFragment : Fragment(), PokemonFoundComponent.Listener, SearchBarComponent.Listener {
+class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
+        SearchBarComponent.Listener, PokeballLabelComponent.Listener {
 
     private lateinit var binding: FragmentFirstBinding
     private val viewModel: MainViewModel by activityViewModels()
@@ -42,9 +50,16 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener, SearchBarCompo
         binding.pokemonComponent.visibility = View.GONE
         binding.pokemonComponent.listener = this
         binding.searchBarComponent.listener = this
+        binding.recyclerComponent.setLabel(getString(R.string.fragment_first_pokemon_catch))
 
         viewModel.isLoading.observe(viewLifecycleOwner, { if (it) showLoad() else hideLoad() })
         viewModel.pokemonFound.observe(viewLifecycleOwner, { foundPokemon(it) })
+        viewModel.pokemonCatch.observe(viewLifecycleOwner, { updatePokemonsCatch(it) })
+        viewModel.getAllLocalPokemon()
+    }
+
+    override fun onClick(id: Int?, text: String?) {
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show()
     }
 
     override fun onSearchClick(text: String) {
@@ -53,6 +68,11 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener, SearchBarCompo
 
     private fun onSearch(text: String) {
         viewModel.getPokemon(text)
+    }
+
+    private fun updatePokemonsCatch(listCatch: List<PokemonEntity>) {
+        val list = listCatch.map { PokeballLabel(it.id, it.name, this) }
+        binding.recyclerComponent.setList(list)
     }
 
     private fun foundPokemon(pokemon: Pokemon) {

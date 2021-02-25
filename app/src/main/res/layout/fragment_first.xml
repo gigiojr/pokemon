@@ -39,4 +39,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchBarComponent" />
 
+    <com.pokemon.ui.component.LabelRecyclerPokebalLabelComponent
+        android:id="@+id/recyclerComponent"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/pokeball_recycler_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

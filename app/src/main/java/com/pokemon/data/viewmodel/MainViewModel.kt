@@ -17,8 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor (
-    private val pokemonRepository: PokemonRepositoryInterface,
-    private val savedStateHandle: SavedStateHandle
+    private val pokemonRepository: PokemonRepositoryInterface
 ) : ViewModel() {
 
     private val _isLoading : MutableLiveData<Boolean> = MutableLiveData(false)
@@ -29,6 +28,9 @@ class MainViewModel @Inject constructor (
 
     private val _pokemonFound : MutableLiveData<Pokemon> = MutableLiveData<Pokemon>()
     val pokemonFound : LiveData<Pokemon> = _pokemonFound
+
+    private val _pokemonCatch : MutableLiveData<List<PokemonEntity>> = MutableLiveData<List<PokemonEntity>>()
+    val pokemonCatch : LiveData<List<PokemonEntity>> = _pokemonCatch
 
     @SuppressLint("CheckResult")
     fun getPokemon(id: String) {
@@ -71,6 +73,7 @@ class MainViewModel @Inject constructor (
             pokemonRepository.getAllPokemonFromDb()
                 .doOnSubscribe { _isLoading.postValue(true) }
                 .subscribe({
+                    _pokemonCatch.postValue(it)
                     _isLoading.postValue(false)
                 }, { error ->
                     error.printStackTrace()
