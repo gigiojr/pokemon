@@ -4,6 +4,7 @@
 
     <dimen name="pokeball_height">60dp</dimen>
     <dimen name="pokeball_width">60dp</dimen>
+    <dimen name="pokeball_recycler_height">100dp</dimen>
 
     <dimen name="title">22sp</dimen>
     <dimen name="subtitle">18sp</dimen>
