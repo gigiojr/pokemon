@@ -2,6 +2,9 @@
     <dimen name="pokemon_photo_height">124dp</dimen>
     <dimen name="pokemon_photo_width">124dp</dimen>
 
+    <dimen name="pokeball_height">60dp</dimen>
+    <dimen name="pokeball_width">60dp</dimen>
+
     <dimen name="title">22sp</dimen>
     <dimen name="subtitle">18sp</dimen>
 </resources>
