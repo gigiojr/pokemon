@@ -1,6 +1,7 @@
 package com.pokemon.data.model.db
 
 import com.pokemon.data.model.api.Pokemon
+import com.pokemon.data.model.api.PokemonSprites
 
 object PokemonMapper {
     fun transformTo(source: Pokemon) : PokemonEntity {
@@ -12,7 +13,8 @@ object PokemonMapper {
             isDefault = source.isDefault,
             order = source.order,
             weight = source.weight,
-            locationAreaEncounters = source.locationAreaEncounters
+            locationAreaEncounters = source.locationAreaEncounters,
+            image = source.sprites?.frontDefault
         )
     }
 
@@ -31,7 +33,9 @@ object PokemonMapper {
             gameIndices = emptyList(),
             heldItems = emptyList(),
             moves = emptyList(),
-            sprites = null,
+            sprites = PokemonSprites(source.image, null, null,
+                    null, null, null,
+                    null, null),
             species = null,
             stats = emptyList(),
             types = emptyList()
