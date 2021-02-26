@@ -21,6 +21,7 @@
     <string name="component_pokemon_found_label_height">Your height is #dm</string>
     <string name="component_pokemon_found_label_weight">Your weight is #hg</string>
     <string name="component_pokemon_found_subtitle_abilities">Abilities</string>
+    <string name="component_pokemon_found_subtitle_moves">Moves</string>
     <string name="component_pokemon_found_subtitle_types">Types</string>
     <string name="component_pokemon_found_subtitle_held_items">Held items</string>
     <string name="component_pokemon_found_bt_catch">Catch!</string>
