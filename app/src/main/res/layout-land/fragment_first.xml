@@ -15,42 +15,46 @@
             android:id="@+id/pokemonLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/ic_logo_pokemon"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:contentDescription="@string/fragment_first_logo_content_description"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_logo_pokemon"
+            app:layout_constraintEnd_toStartOf="@+id/pokemonComponent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.pokemon.ui.component.SearchBarComponent
             android:id="@+id/searchBarComponent"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/pokemonComponent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pokemonLogo" />
+
+        <com.pokemon.ui.component.LabelRecyclerPokebalLabelComponent
+            android:id="@+id/recyclerComponent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/pokemonComponent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchBarComponent" />
 
         <com.pokemon.ui.component.PokemonFoundComponent
             android:id="@+id/pokemonComponent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBarComponent" />
-
-        <com.pokemon.ui.component.LabelRecyclerPokebalLabelComponent
-            android:id="@+id/recyclerComponent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pokemonComponent" />
+            app:layout_constraintStart_toEndOf="@+id/searchBarComponent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
