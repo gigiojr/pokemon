@@ -38,12 +38,39 @@ class SecondFragment : Fragment() {
     }
 
     private fun initView() {
-        binding.pokemonComponent.visibility = View.GONE
+        binding.pokemonFoundComponent.hideButton()
         viewModel.pokemonFound.observe(viewLifecycleOwner, { it?.let { foundPokemon(it) } })
     }
 
     private fun foundPokemon(pokemon: Pokemon) {
-        binding.pokemonComponent.visibility = View.VISIBLE
-        binding.pokemonComponent.showPokemonCatch(pokemon)
+        binding.pokemonFoundComponent.setImage(pokemon.sprites?.frontDefault ?: "")
+        binding.pokemonFoundComponent.setTitleCatch(pokemon.name)
+
+        binding.pokemonCatchComponent.setPokemonHeight(pokemon.height)
+        binding.pokemonCatchComponent.setPokemonWeight(pokemon.weight)
+
+        binding.pokemonCatchComponent.setAbilities(
+            if(pokemon.abilities != null && pokemon.abilities.isNotEmpty())
+                pokemon.abilities.map { it.ability.name }
+            else listOf("empty")
+        )
+
+        binding.pokemonCatchComponent.setMoves(
+            if(pokemon.moves != null && pokemon.moves.isNotEmpty())
+                pokemon.moves.map { it.move.name }
+            else listOf("empty")
+        )
+
+        binding.pokemonCatchComponent.setTypes(
+            if(pokemon.types != null && pokemon.types.isNotEmpty())
+                pokemon.types.map { it.type.name }
+            else listOf("empty")
+        )
+
+        binding.pokemonCatchComponent.setHeldItems(
+            if(pokemon.heldItems != null && pokemon.heldItems.isNotEmpty())
+                pokemon.heldItems.map { it.item.name }
+            else listOf("empty")
+        )
     }
 }

@@ -1,0 +1,20 @@
+<resources>
+    <string name="component_label_recycler_pokeball_label">Pokemons Catch</string>
+
+    <!-- Component Pokemon Strings   -->
+    <string name="component_pokemon_found_image_content_description">Pokemon image</string>
+    <string name="component_pokemon_found_found">You found a #!</string>
+    <string name="component_pokemon_found_catch">You catch a #!</string>
+    <string name="component_pokemon_found_label_height">The height is #dm</string>
+    <string name="component_pokemon_found_label_weight">The weight is #hg</string>
+    <string name="component_pokemon_found_subtitle_abilities">Abilities</string>
+    <string name="component_pokemon_found_subtitle_moves">Moves</string>
+    <string name="component_pokemon_found_subtitle_types">Types</string>
+    <string name="component_pokemon_found_subtitle_held_items">Held items</string>
+    <string name="component_pokemon_found_bt_catch">Catch!</string>
+
+    <!-- Component Search Bar Strings   -->
+    <string name="component_search_bar_bt_search">Search</string>
+    <string name="component_search_bar_bt_search_content_description">Search button</string>
+    <string name="component_search_bar_hint_search">Search by ID or name</string>
+</resources>

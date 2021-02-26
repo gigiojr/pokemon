@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.pokemon.ui.component.SearchBarComponent
+        <com.pokemon.component.ui.SearchBarComponent
             android:id="@+id/searchBarComponent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pokemonLogo" />
 
-        <com.pokemon.ui.component.LabelRecyclerPokebalLabelComponent
+        <com.pokemon.component.ui.LabelRecyclerPokebalLabelComponent
             android:id="@+id/recyclerComponent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchBarComponent" />
 
-        <com.pokemon.ui.component.PokemonFoundComponent
+        <com.pokemon.component.ui.PokemonFoundComponent
             android:id="@+id/pokemonComponent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

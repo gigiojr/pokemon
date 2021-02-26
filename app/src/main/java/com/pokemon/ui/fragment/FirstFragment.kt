@@ -8,19 +8,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.pokemon.R
-import com.pokemon.data.model.PokeballLabel
+import com.pokemon.component.model.PokeballLabel
+
+import com.pokemon.component.ui.ImageLabelComponent
+import com.pokemon.component.ui.PokemonFoundComponent
+import com.pokemon.component.ui.SearchBarComponent
 import com.pokemon.data.model.api.Pokemon
 import com.pokemon.data.model.db.PokemonEntity
 import com.pokemon.data.viewmodel.MainViewModel
 import com.pokemon.databinding.FragmentFirstBinding
-import com.pokemon.ui.component.PokeballLabelComponent
-import com.pokemon.ui.component.PokemonFoundComponent
-import com.pokemon.ui.component.SearchBarComponent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
-        SearchBarComponent.Listener, PokeballLabelComponent.Listener {
+        SearchBarComponent.Listener, ImageLabelComponent.Listener {
 
     private lateinit var binding: FragmentFirstBinding
     private val viewModel: MainViewModel by activityViewModels()
@@ -53,9 +54,7 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
     }
 
     override fun onClick(id: Int?, text: String?) {
-        text?.let {
-            viewModel.getPokemon(text)
-        }
+        text?.let { onSearch(text) }
     }
 
     override fun onSearchClick(text: String) {
@@ -63,7 +62,13 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
     }
 
     private fun onSearch(text: String) {
-        viewModel.getPokemon(text)
+        if (text.isEmpty()){
+            binding.searchBarComponent.showErrorText(
+                getString(R.string.fragment_first_error_empty_search))
+        } else {
+            binding.searchBarComponent.hideErrorText()
+            viewModel.getPokemon(text)
+        }
     }
 
     private fun updatePokemonsCatch(listCatch: List<PokemonEntity>) {
@@ -73,7 +78,8 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
 
     private fun foundPokemon(pokemon: Pokemon?) {
         pokemon?.let {
-            binding.pokemonComponent.showPokemonFound(pokemon)
+            binding.pokemonComponent.setImage(pokemon.sprites?.frontDefault ?: "")
+            binding.pokemonComponent.setTitleFound(pokemon.name)
             binding.pokemonComponent.visibility = View.VISIBLE
         } ?: apply {
             binding.pokemonComponent.visibility = View.GONE
@@ -81,7 +87,7 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
         binding.searchBarComponent.clearField()
     }
 
-    override fun onCatchClick(pokemon: Pokemon) {
+    override fun onCatchClick() {
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
 
