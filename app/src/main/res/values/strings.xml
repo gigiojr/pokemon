@@ -1,31 +1,11 @@
 <resources>
     <string name="app_name">Pokemon</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="fragment_second_label">Second Fragment</string>
 
     <!-- First Fragment Strings   -->
+    <string name="fragment_first_label">First Fragment</string>
     <string name="fragment_first_logo_content_description">Pokemon logo</string>
-
-    <!-- Component Pokemon Strings   -->
-    <string name="component_pokemon_found_image_content_description">Pokemon image</string>
-    <string name="component_pokemon_found_found">You found a #!</string>
-    <string name="component_pokemon_found_catch">You catch a #!</string>
-    <string name="component_pokemon_found_label_height">Your height is #dm</string>
-    <string name="component_pokemon_found_label_weight">Your weight is #hg</string>
-    <string name="component_pokemon_found_subtitle_abilities">Abilities</string>
-    <string name="component_pokemon_found_subtitle_types">Types</string>
-    <string name="component_pokemon_found_subtitle_held_items">Held items</string>
-    <string name="component_pokemon_found_bt_catch">Catch!</string>
-
-    <!-- Component Search Bar Strings   -->
-    <string name="component_search_bar_bt_search">Search</string>
-    <string name="component_search_bar_bt_search_content_description">Search button</string>
-    <string name="component_search_bar_hint_search">Search Pokemon!</string>
+    <string name="fragment_first_error_empty_search">The pokemon name or id is required</string>
 </resources>

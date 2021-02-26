@@ -10,4 +10,5 @@
 
     <dimen name="title">22sp</dimen>
     <dimen name="subtitle">18sp</dimen>
+    <dimen name="error">12sp</dimen>
 </resources>
