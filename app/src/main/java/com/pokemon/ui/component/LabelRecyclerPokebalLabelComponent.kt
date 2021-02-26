@@ -23,6 +23,7 @@ class LabelRecyclerPokebalLabelComponent(context: Context, attrs: AttributeSet?)
 
     private fun initComponent() {
         binding.layout.visibility = GONE
+        binding.label.text = context.getString(R.string.fragment_first_pokemon_catch)
         binding.recycler.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.HORIZONTAL, false)
     }

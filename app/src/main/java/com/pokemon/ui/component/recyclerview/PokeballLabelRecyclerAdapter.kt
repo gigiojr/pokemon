@@ -20,6 +20,7 @@ class PokeballLabelRecyclerAdapter(private val dataSet: List<PokeballLabel>) :
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.component.id = dataSet[position].id
         viewHolder.component.text = dataSet[position].label
+        viewHolder.component.image = dataSet[position].image
         viewHolder.component.listener = dataSet[position].listener
     }
 

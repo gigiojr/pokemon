@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.FirstFragment">
 
-    <com.pokemon.ui.component.PokemonFoundComponent
+    <com.pokemon.ui.component.PokemonCatchComponent
         android:id="@+id/pokemonComponent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -50,7 +50,6 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
         binding.pokemonComponent.visibility = View.GONE
         binding.pokemonComponent.listener = this
         binding.searchBarComponent.listener = this
-        binding.recyclerComponent.setLabel(getString(R.string.fragment_first_pokemon_catch))
 
         viewModel.isLoading.observe(viewLifecycleOwner, { if (it) showLoad() else hideLoad() })
         viewModel.pokemonFound.observe(viewLifecycleOwner, { foundPokemon(it) })
@@ -71,7 +70,7 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
     }
 
     private fun updatePokemonsCatch(listCatch: List<PokemonEntity>) {
-        val list = listCatch.map { PokeballLabel(it.id, it.name, this) }
+        val list = listCatch.map { PokeballLabel(it.id, it.name, it.image, this) }
         binding.recyclerComponent.setList(list)
     }
 
