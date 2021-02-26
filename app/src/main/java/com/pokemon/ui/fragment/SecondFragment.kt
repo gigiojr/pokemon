@@ -32,9 +32,14 @@ class SecondFragment : Fragment() {
         initView()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.clearFoundPokemon()
+    }
+
     private fun initView() {
         binding.pokemonComponent.visibility = View.GONE
-        viewModel.pokemonFound.observe(viewLifecycleOwner, { foundPokemon(it) })
+        viewModel.pokemonFound.observe(viewLifecycleOwner, { it?.let { foundPokemon(it) } })
     }
 
     private fun foundPokemon(pokemon: Pokemon) {

@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pokemon.R
 import com.pokemon.data.model.PokeballLabel
 import com.pokemon.data.model.api.Pokemon
@@ -20,7 +17,6 @@ import com.pokemon.databinding.FragmentFirstBinding
 import com.pokemon.ui.component.PokeballLabelComponent
 import com.pokemon.ui.component.PokemonFoundComponent
 import com.pokemon.ui.component.SearchBarComponent
-import com.pokemon.ui.component.recyclerview.PokeballLabelRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,7 +54,9 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
     }
 
     override fun onClick(id: Int?, text: String?) {
-        Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+        text?.let {
+            viewModel.getPokemon(text)
+        }
     }
 
     override fun onSearchClick(text: String) {
@@ -74,9 +72,13 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
         binding.recyclerComponent.setList(list)
     }
 
-    private fun foundPokemon(pokemon: Pokemon) {
-        binding.pokemonComponent.showPokemonFound(pokemon)
-        binding.pokemonComponent.visibility = View.VISIBLE
+    private fun foundPokemon(pokemon: Pokemon?) {
+        pokemon?.let {
+            binding.pokemonComponent.showPokemonFound(pokemon)
+            binding.pokemonComponent.visibility = View.VISIBLE
+        } ?: apply {
+            binding.pokemonComponent.visibility = View.GONE
+        }
         binding.searchBarComponent.clearField()
     }
 

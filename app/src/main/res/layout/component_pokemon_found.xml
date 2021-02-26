@@ -41,6 +41,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:padding="8dp"
+        android:background="@drawable/component_bg_white_border_teal_radius16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +57,7 @@
             android:background="@drawable/ic_pokeball"
             android:scaleType="fitXY" />
 
-        <Button
+        <TextView
             android:id="@+id/btCatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,6 +65,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
+            android:textSize="@dimen/title"
+            android:textColor="@color/teal_700"
+            android:textAllCaps="true"
             android:text="@string/component_pokemon_found_bt_catch" />
     </LinearLayout>
 

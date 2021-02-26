@@ -26,8 +26,8 @@ class MainViewModel @Inject constructor (
     private val _isLocal : MutableLiveData<Boolean> = MutableLiveData(false)
     val isLocal : LiveData<Boolean> = _isLocal
 
-    private val _pokemonFound : MutableLiveData<Pokemon> = MutableLiveData<Pokemon>()
-    val pokemonFound : LiveData<Pokemon> = _pokemonFound
+    private val _pokemonFound : MutableLiveData<Pokemon?> = MutableLiveData<Pokemon?>()
+    val pokemonFound : LiveData<Pokemon?> = _pokemonFound
 
     private val _pokemonCatch : MutableLiveData<List<PokemonEntity>> = MutableLiveData<List<PokemonEntity>>()
     val pokemonCatch : LiveData<List<PokemonEntity>> = _pokemonCatch
@@ -80,5 +80,9 @@ class MainViewModel @Inject constructor (
                     _isLoading.postValue(false)
                 })
         }
+    }
+
+    fun clearFoundPokemon() {
+        _pokemonFound.postValue(null)
     }
 }

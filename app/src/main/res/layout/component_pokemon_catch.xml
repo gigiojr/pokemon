@@ -35,75 +35,76 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pokemonImage" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/detailLayout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:paddingVertical="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title">
 
-        <TextView
-            android:id="@+id/labelHeight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/component_pokemon_found_label_height"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/labelWeight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/component_pokemon_found_label_weight"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelHeight" />
-
-        <com.pokemon.ui.component.SectionOptionsComponent
-            android:id="@+id/abilitiesLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detailLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelWeight" />
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
 
-        <com.pokemon.ui.component.SectionOptionsComponent
-            android:id="@+id/movesLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/abilitiesLayout" />
+            <TextView
+                android:id="@+id/labelHeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/component_pokemon_found_label_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.pokemon.ui.component.SectionOptionsComponent
-            android:id="@+id/typesLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movesLayout" />
+            <TextView
+                android:id="@+id/labelWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/component_pokemon_found_label_weight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelHeight" />
 
-        <com.pokemon.ui.component.SectionOptionsComponent
-            android:id="@+id/heldItemsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/typesLayout" />
+            <com.pokemon.ui.component.SectionOptionsComponent
+                android:id="@+id/typesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/labelWeight" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.pokemon.ui.component.SectionOptionsComponent
+                android:id="@+id/heldItemsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/typesLayout" />
 
+            <com.pokemon.ui.component.SectionOptionsComponent
+                android:id="@+id/abilitiesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heldItemsLayout" />
+
+            <com.pokemon.ui.component.SectionOptionsComponent
+                android:id="@+id/movesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/abilitiesLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
