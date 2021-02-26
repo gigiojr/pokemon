@@ -12,5 +12,6 @@ data class PokemonEntity (
     val isDefault: Boolean,
     val order: Int,
     val weight: Int,
-    val locationAreaEncounters: String?
+    val locationAreaEncounters: String?,
+    val image: String?
 )
