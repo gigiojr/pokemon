@@ -13,8 +13,13 @@ import com.pokemon.component.model.PokeballLabel
 import com.pokemon.component.ui.ImageLabelComponent
 import com.pokemon.component.ui.PokemonFoundComponent
 import com.pokemon.component.ui.SearchBarComponent
+import com.pokemon.data.model.PokemonEntityView
+import com.pokemon.data.model.PokemonError
+import com.pokemon.data.model.PokemonView
 import com.pokemon.data.model.api.Pokemon
 import com.pokemon.data.model.db.PokemonEntity
+import com.pokemon.data.util.Dialog
+import com.pokemon.data.util.Resource
 import com.pokemon.data.viewmodel.MainViewModel
 import com.pokemon.databinding.FragmentFirstBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,9 +52,8 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
         binding.pokemonComponent.listener = this
         binding.searchBarComponent.listener = this
 
-        viewModel.isLoading.observe(viewLifecycleOwner, { if (it) showLoad() else hideLoad() })
-        viewModel.pokemonFound.observe(viewLifecycleOwner, { foundPokemon(it) })
-        viewModel.pokemonCatch.observe(viewLifecycleOwner, { updatePokemonsCatch(it) })
+        viewModel.pokemonFound.observe(viewLifecycleOwner, this::pokemonFoundObserver)
+        viewModel.pokemonCatch.observe(viewLifecycleOwner, this::pokemonCatchObserver)
         viewModel.getAllLocalPokemon()
     }
 
@@ -57,8 +61,28 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
         text?.let { onSearch(text) }
     }
 
-    override fun onSearchClick(text: String) {
-        onSearch(text)
+    override fun onSearchClick(text: String) = onSearch(text)
+
+    private fun pokemonFoundObserver(resource: Resource<PokemonView>) {
+        when (resource) {
+            is Resource.Loading -> showLoad()
+            is Resource.Error -> { resource.data?.error?.let { displayError(it) }}
+            is Resource.Success -> {
+                hideLoad()
+                resource.data?.let { foundPokemon(it.pokemon) }
+            }
+        }
+    }
+
+    private fun pokemonCatchObserver(resource: Resource<PokemonEntityView>) {
+        when (resource) {
+            is Resource.Loading -> showLoad()
+            is Resource.Error -> { resource.data?.error?.let { displayError(it) }}
+            is Resource.Success -> {
+                hideLoad()
+                resource.data?.pokemonList?.let { updatePokemonsCatch(it) }
+            }
+        }
     }
 
     private fun onSearch(text: String) {
@@ -85,6 +109,11 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
             binding.pokemonComponent.visibility = View.GONE
         }
         binding.searchBarComponent.clearField()
+    }
+
+    private fun displayError(pokemonError: PokemonError) {
+        hideLoad()
+        Dialog.showAlert(context, pokemonError.title, pokemonError.description)
     }
 
     override fun onCatchClick() {

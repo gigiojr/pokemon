@@ -1,4 +1,4 @@
-package com.pokemon.data.extension
+package com.pokemon.data.util
 
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers

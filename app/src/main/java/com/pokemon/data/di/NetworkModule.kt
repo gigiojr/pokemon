@@ -1,9 +1,16 @@
 package com.pokemon.data.di
 
+import android.content.Context
+import com.pokemon.data.network.NetworkInfo
+import com.pokemon.data.network.NetworkInfoImpl
+import com.pokemon.data.repository.PokemonRepository
+import com.pokemon.data.repository.PokemonRepositoryInterface
 import com.pokemon.data.service.PokemonService
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,6 +21,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+    @Singleton
+    @Provides
+    fun bindNetworkInfo(@ApplicationContext context: Context): NetworkInfo =
+            NetworkInfoImpl(context)
+
     @Singleton
     @Provides
     fun providesPokemonApiAccess(): PokemonService {

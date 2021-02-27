@@ -1,88 +1,97 @@
 package com.pokemon.data.viewmodel
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.pokemon.data.extension.async
-import com.pokemon.data.model.api.Pokemon
-import com.pokemon.data.model.db.PokemonEntity
-import com.pokemon.data.model.db.PokemonMapper
+import com.pokemon.R
+import com.pokemon.data.model.PokemonEntityView
+import com.pokemon.data.model.PokemonError
+import com.pokemon.data.model.PokemonView
+import com.pokemon.data.network.NetworkInfo
+import com.pokemon.data.util.async
 import com.pokemon.data.repository.PokemonRepositoryInterface
+import com.pokemon.data.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor (
-    private val pokemonRepository: PokemonRepositoryInterface
+        @ApplicationContext private val context: Context,
+        private val pokemonRepository: PokemonRepositoryInterface,
+        private val networkInfo: NetworkInfo
 ) : ViewModel() {
 
-    private val _isLoading : MutableLiveData<Boolean> = MutableLiveData(false)
-    val isLoading : LiveData<Boolean> = _isLoading
+    private val _pokemonFound = MutableLiveData<Resource<PokemonView>>()
+    val pokemonFound : LiveData<Resource<PokemonView>> = _pokemonFound
 
-    private val _isLocal : MutableLiveData<Boolean> = MutableLiveData(false)
-    val isLocal : LiveData<Boolean> = _isLocal
-
-    private val _pokemonFound : MutableLiveData<Pokemon?> = MutableLiveData<Pokemon?>()
-    val pokemonFound : LiveData<Pokemon?> = _pokemonFound
-
-    private val _pokemonCatch : MutableLiveData<List<PokemonEntity>> = MutableLiveData<List<PokemonEntity>>()
-    val pokemonCatch : LiveData<List<PokemonEntity>> = _pokemonCatch
+    private val _pokemonCatch = MutableLiveData<Resource<PokemonEntityView>>()
+    val pokemonCatch : LiveData<Resource<PokemonEntityView>> = _pokemonCatch
 
     @SuppressLint("CheckResult")
     fun getPokemon(id: String) {
         pokemonRepository.getPokemon(id)
             .async()
-            .doOnSubscribe { _isLoading.postValue(true) }
+            .doOnSubscribe { _pokemonFound.postValue(Resource.Loading()) }
             .subscribe({ pokemon ->
-                _pokemonFound.postValue(pokemon)
-                _isLoading.postValue(false)
-                _isLocal.postValue(false)
+                _pokemonFound.postValue(Resource.Success(
+                    data = PokemonView(
+                        pokemon = pokemon
+                    )
+                ))
             }, { error ->
                 error.printStackTrace()
-                _isLoading.postValue(false)
-                getLocalPokemon(id)
-            })
-    }
 
-    @SuppressLint("CheckResult")
-    fun getLocalPokemon(id: String) {
-        GlobalScope.launch {
-            pokemonRepository.getPokemonFromDb(id, id)
-                .doOnSubscribe { _isLoading.postValue(true) }
-                .subscribe({ pokemonEntity ->
-                    pokemonEntity?.let {
-                        if (it.isNotEmpty()){
-                            _pokemonFound.postValue(PokemonMapper.transformTo(it[0]))
-                        }
-                    }
-                    _isLoading.postValue(false)
-                    _isLocal.postValue(true)
-                }, { error ->
-                    error.printStackTrace()
-                    _isLoading.postValue(false)
-                })
-        }
+                _pokemonFound.postValue(Resource.Error(
+                    data = PokemonView(
+                        error = if (networkInfo.isOnline()) getError(error)
+                            else getInternetError()
+                    )
+                ))
+            })
     }
 
     fun getAllLocalPokemon(){
         GlobalScope.launch {
             pokemonRepository.getAllPokemonFromDb()
-                .doOnSubscribe { _isLoading.postValue(true) }
+                .doOnSubscribe { _pokemonCatch.postValue(Resource.Loading()) }
                 .subscribe({
-                    _pokemonCatch.postValue(it)
-                    _isLoading.postValue(false)
+                    _pokemonCatch.postValue(Resource.Success(
+                        data = PokemonEntityView(
+                            pokemonList = it
+                        )
+                    ))
                 }, { error ->
                     error.printStackTrace()
-                    _isLoading.postValue(false)
+                    _pokemonCatch.postValue(Resource.Success(
+                        data = PokemonEntityView(
+                            pokemonList = emptyList(),
+                            error = getError(error)
+                        )
+                    ))
                 })
         }
     }
 
     fun clearFoundPokemon() {
-        _pokemonFound.postValue(null)
+        _pokemonFound.postValue(Resource.Success(data = PokemonView()))
+    }
+
+    private fun getError(error: Throwable): PokemonError{
+        return  PokemonError(
+                title = context.getString(R.string.error_generic_title),
+                description = error.message ?: context.getString(R.string.error_generic_description)
+        )
+    }
+
+    private fun getInternetError(): PokemonError {
+        return  PokemonError(
+            title = context.getString(R.string.error_network_not_connected_title),
+            description = context.getString(R.string.error_network_not_connected_description)
+        )
     }
 }

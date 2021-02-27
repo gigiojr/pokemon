@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Pokemon</string>
 
+    <string name="error_generic_title">Error</string>
+    <string name="error_generic_description">An unexpected error has occurred.</string>
+    <string name="error_network_not_connected_title">Ops.. App offline</string>
+    <string name="error_network_not_connected_description">Please make sure your connection is active and try again.</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="fragment_second_label">Second Fragment</string>
 
