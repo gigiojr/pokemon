@@ -3,10 +3,8 @@ package com.pokemon.data.di
 import android.content.Context
 import com.pokemon.data.network.NetworkInfo
 import com.pokemon.data.network.NetworkInfoImpl
-import com.pokemon.data.repository.PokemonRepository
-import com.pokemon.data.repository.PokemonRepositoryInterface
 import com.pokemon.data.service.PokemonService
-import dagger.Binds
+import com.pokemon.data.service.WebHookService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,5 +38,23 @@ object NetworkModule {
             .client(client)
             .build()
             .create(PokemonService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun webHookApiAccess(): WebHookService {
+        val uid = "cf6b43a8-9a5e-44a5-870a-349f87c61d91"
+
+        val client = OkHttpClient
+            .Builder()
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl("https://webhook.site/")
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+            .create(WebHookService::class.java)
     }
 }

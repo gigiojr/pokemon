@@ -8,6 +8,7 @@
 
     <!-- Strings used for fragments for navigation -->
     <string name="fragment_second_label">Second Fragment</string>
+    <string name="fragment_second_favorite">Favorite</string>
 
     <!-- First Fragment Strings   -->
     <string name="fragment_first_label">First Fragment</string>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.pokemon.R
 import com.pokemon.component.model.PokeballLabel
@@ -117,6 +118,7 @@ class FirstFragment : Fragment(), PokemonFoundComponent.Listener,
     }
 
     override fun onCatchClick() {
+        viewModel.catchPokemon()
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
     }
 
