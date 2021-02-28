@@ -1,3 +1,13 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="pokemon_photo_height">124dp</dimen>
+    <dimen name="pokemon_photo_width">124dp</dimen>
+
+    <dimen name="pokeball_height">40dp</dimen>
+    <dimen name="pokeball_width">40dp</dimen>
+    <dimen name="pokeball_bt_height">30dp</dimen>
+    <dimen name="pokeball_bt_width">30dp</dimen>
+    <dimen name="pokeball_recycler_height">80dp</dimen>
+
+    <dimen name="title">22sp</dimen>
+    <dimen name="subtitle">18sp</dimen>
 </resources>
